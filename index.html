@@ -33,7 +33,7 @@ window.addEventListener('WebComponentsReady', function(e) {
 
 (function() {
   'use strict';
-
+  // thanks: https://gist.github.com/ebidel/1d5ede1e35b6f426a2a7
   function lazyLoadWCPolyfillsIfNecessary() {
     var onload = function() {
       // For native Imports, manually fire WCR so user code
@@ -43,7 +43,6 @@ window.addEventListener('WebComponentsReady', function(e) {
             new CustomEvent('WebComponentsReady', {bubbles: true}));
       }
     };
-
     var webComponentsSupported = (
       'registerElement' in document
       && 'import' in document.createElement('link')
