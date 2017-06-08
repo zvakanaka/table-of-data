@@ -1,5 +1,6 @@
 <template id="table-of-data-template">
-
+  <table class="table-of-data">
+  </table>
 </template>
 <script type="text/javascript">
   const CAN_SHADOW_DOM = !!HTMLElement.prototype.attachShadow;//V1
@@ -18,14 +19,12 @@
       var styleEl = document.createElement('style');
       styleEl.setAttribute('title', 'table-of-data');
       styleEl.setAttribute('type', 'text/css');
-      let css = `.exif div { display: inline-block; }
-      .hidden { display: none; }`;
+      let css = `.table-of-data table, .table-of-data td, .table-of-data th { border: 1px solid #ddd; text-align: left; } table.table-of-data { border-collapse: collapse; width: 100%; } table.table-of-data th, table.table-of-data td { padding: 15px; }`;
       if (styleEl.styleSheet) {
         styleEl.styleSheet.cssText = css;
       } else {
         styleEl.appendChild(document.createTextNode(css));
       }
-
       super(); //always always
       const t = querySelector('template#table-of-data-template');
       const instance = t.content.cloneNode(true);
@@ -49,6 +48,29 @@
     //happens when an observedAttribute changes
     //react to attribute changes here
     attributeChangedCallback(name) {
+    }
+    attachTable(data) {
+      this.data = data;
+      let root = this;
+      if (CAN_SHADOW_DOM) root = this.shadowRoot;
+      let tableOfData = root.querySelector('table');
+      tableOfData.innerHTML = '';
+      let tableHeadingRow = document.createElement('tr');
+      tableOfData.appendChild(tableHeadingRow);
+      data.headings.forEach(heading => {
+        let tableHeading = document.createElement('th');
+        tableHeading.textContent = heading;
+        tableOfData.appendChild(tableHeading);
+      });
+      data.rows.forEach(rowData => {
+        let tableRow = document.createElement('tr');
+        data.headings.forEach(column => {
+          let rowEl = document.createElement('td');
+          rowEl.textContent = rowData[column];
+          tableRow.appendChild(rowEl);
+        });
+        tableOfData.appendChild(tableRow);
+      });
     }
   });
 </script>
