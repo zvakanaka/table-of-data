@@ -19,7 +19,7 @@
       var styleEl = document.createElement('style');
       styleEl.setAttribute('title', 'table-of-data');
       styleEl.setAttribute('type', 'text/css');
-      let css = `.table-of-data table, .table-of-data td, .table-of-data th { border: 1px solid #ddd; border-width: 1px 0; text-align: left; } table.table-of-data { border-collapse: collapse; width: 100%; } table.table-of-data th, table.table-of-data td { padding: 8px; }`;
+      let css = `.table-of-data td, .table-of-data th { border-bottom: 1px solid #ddd; text-align: left; } table.table-of-data { border-collapse: collapse; width: 100%; } table.table-of-data th, table.table-of-data td { padding: 8px; }`;
       if (styleEl.styleSheet) {
         styleEl.styleSheet.cssText = css;
       } else {
