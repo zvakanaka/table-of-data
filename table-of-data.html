@@ -21,11 +21,9 @@
   //querySelector only works at top level because currentScript is only valid there
   const template = querySelector('template#table-of-data-template');
   customElements.define('table-of-data', class extends HTMLElement {
-    //template setup things here
-    constructor() {
+    constructor() {//template setup things here
       var styleEl = document.createElement('style');
       styleEl.setAttribute('title', 'table-of-data');
-      styleEl.setAttribute('type', 'text/css');
       let css = `.table-of-data td, .table-of-data th { border-bottom: 1px solid #ddd; text-align: left; } table.table-of-data { border-collapse: collapse; width: 100%; } table.table-of-data th, table.table-of-data td { padding: 8px; }`;
       if (styleEl.styleSheet) {
         styleEl.styleSheet.cssText = css;
@@ -45,22 +43,14 @@
         }
       }
     }
-    //event listeners here
-    attachedCallback() {
-    }
-    //event cleanup
-    detachedCallback() {
-    }
-    //happens when an observedAttribute changes
-    //react to attribute changes here
-    attributeChangedCallback(name) {
-    }
-    attachTable(data) {
+    attachedCallback() {}//event listeners
+    detachedCallback() {}//event cleanup
+    attributeChangedCallback(name) {}//react to observed attribute changes here
+    attachTable(data) {//add/refresh data to table
       this.data = data;
-      let root = this;
-      if (CAN_SHADOW_DOM) root = this.shadowRoot;
+      let root = CAN_SHADOW_DOM ? this.shadowRoot : this;
       let tableOfData = root.querySelector('table');
-      tableOfData.innerHTML = '';
+      tableOfData.innerHTML = '';//clear the table
       let tableHeadingRow = document.createElement('tr');
       tableOfData.appendChild(tableHeadingRow);
       data.headings.forEach(heading => {
@@ -74,7 +64,7 @@
           let rowEl = document.createElement('td');
           if (isMarkDownURL(rowData[column])) {
             let a = document.createElement('a');
-            a.href = rowData[column].split('](')[1].slice(0,-1);
+            a.href = rowData[column].split('](')[1].slice(0, -1);
             a.textContent = rowData[column].split('](')[0].slice(1);
             rowEl.appendChild(a);
           } else {
