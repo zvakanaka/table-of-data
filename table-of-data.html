@@ -14,8 +14,7 @@
   }
   function isMarkDownURL(text) {
     let expression = /\[([-a-zA-Z0-9@:%_\+.~#?&//=\s]*)\]\((https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))\)/g;
-    if (expression.test(text)) return true;
-    return false;
+    return expression.test(text) ? true : false;
   }
   //querySelector only works at top level because currentScript is only valid there
   const template = querySelector('template#table-of-data-template');
