@@ -44,18 +44,18 @@
     attachedCallback() {}//event listeners
     detachedCallback() {}//event cleanup
     attributeChangedCallback(name) {}//observed attribute changes
-    attachTable(data) {//add/refresh data to table
+    attachTable(data, options) {//add/refresh data to table
       this.data = data;
       let root = CAN_SHADOW_DOM ? this.shadowRoot : this;
       let tableOfData = root.querySelector('table');
-      tableOfData.innerHTML = '';//clear the table
+      let frag = document.createDocumentFragment();
       let tableHeadingRow = document.createElement('tr');
-      tableOfData.appendChild(tableHeadingRow);
       data.headings.forEach(heading => {
         let tableHeading = document.createElement('th');
         tableHeading.textContent = heading;
-        tableOfData.appendChild(tableHeading);
+        tableHeadingRow.appendChild(tableHeading);
       });
+      frag.appendChild(tableHeadingRow);
       data.rows.forEach(rowData => {
         let tableRow = document.createElement('tr');
         data.headings.forEach(column => {
@@ -70,8 +70,10 @@
           }
           tableRow.appendChild(rowEl);
         });
-        tableOfData.appendChild(tableRow);
+        frag.appendChild(tableRow);
       });
+      tableOfData.innerHTML = '';//clear the table
+      tableOfData.appendChild(frag);
     }
   });
 </script>
