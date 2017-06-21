@@ -4,7 +4,7 @@
   "authors": [
     "quintonish@gmail.com"
   ],
-  "description": "v1 web component table",
+  "description": "Lightweight v1 web component table with some markdown support.",
   "main": "table-of-data.html",
   "keywords": [
     "html",
