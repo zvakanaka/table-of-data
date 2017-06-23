@@ -1,17 +1,18 @@
 <template id="table-of-data-template">
   <table class="table-of-data"></table>
+  <style>
+    table.table-of-data td, table.table-of-data th { border-bottom: 1px solid #ddd; text-align: left; }
+    table.table-of-data { border-collapse: collapse; width: 100%; }
+    table.table-of-data th, table.table-of-data td { padding: 8px; }
+  </style>
 </template>
 <script type="text/javascript">
-  const CAN_SHADOW_DOM = !!HTMLElement.prototype.attachShadow;//V1
   let querySelector = function(selector) {
     //currentScript is this ^ script tag, and the owner is this document around it
     let script = document._currentScript || document.currentScript;
     //ownerDocument is this entire file
     return script ? script.ownerDocument.querySelector(selector) : document.querySelector(selector);
   };
-  function isElementShadowRoot(el) {
-    return !!(el.toString() === '[Object] ShadowRoot');
-  }
   function isMarkDownURL(text) {
     let expression = /\[([-a-zA-Z0-9@:%_\+.~#?&//=\s]*)\]\((https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))\)/g;
     return expression.test(text) ? true : false;
@@ -20,34 +21,17 @@
   const template = querySelector('template#table-of-data-template');
   customElements.define('table-of-data', class extends HTMLElement {
     constructor() {//template setup
-      var styleEl = document.createElement('style');
-      styleEl.setAttribute('title', 'table-of-data');
-      let css = `.table-of-data td, .table-of-data th { border-bottom: 1px solid #ddd; text-align: left; } table.table-of-data { border-collapse: collapse; width: 100%; } table.table-of-data th, table.table-of-data td { padding: 8px; }`;
-      if (styleEl.styleSheet) {
-        styleEl.styleSheet.cssText = css;
-      } else {
-        styleEl.appendChild(document.createTextNode(css));
-      }
       super(); //always always
-      const instance = template.content.cloneNode(true);
-      if (CAN_SHADOW_DOM) {
-        let shadowRoot = this.attachShadow({mode: 'open'});
-        shadowRoot.appendChild(instance);
-        shadowRoot.appendChild(styleEl);
-      } else {
-        this.appendChild(instance);
-        if (!document.querySelector('style[title="table-of-data"]')) {
-          document.head.appendChild(styleEl);
-        }
-      }
     }
-    attachedCallback() {}//event listeners
-    detachedCallback() {}//event cleanup
+    connectedCallback() {//event listeners
+      const instance = template.content.cloneNode(true);
+      this.appendChild(instance);
+    }
+    disconnectedCallback() {}//event cleanup
     attributeChangedCallback(name) {}//observed attribute changes
     attachTable(data, options) {//add/refresh data to table
       this.data = data;
-      let root = CAN_SHADOW_DOM ? this.shadowRoot : this;
-      let tableOfData = root.querySelector('table');
+      let tableOfData = this.querySelector('.table-of-data');
       let frag = document.createDocumentFragment();
       let tableHeadingRow = document.createElement('tr');
       data.headings.forEach(heading => {
@@ -66,7 +50,7 @@
             a.textContent = rowData[column].split('](')[0].slice(1);
             rowEl.appendChild(a);
           } else {
-            rowEl.textContent = rowData[column];
+            rowEl.innerHTML = rowData[column];
           }
           tableRow.appendChild(rowEl);
         });
