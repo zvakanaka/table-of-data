@@ -24,7 +24,7 @@ let data = {
     'Place': '[New York Islands](https://en.wikipedia.org/wiki/List_of_islands_of_New_York)'
   }]
 };
-document.querySelector('table-of-data').attachTable(data);
+document.querySelector('table-of-data').data = data;
 ```
 ![Screenshot](http://i.imgur.com/Wi9b2Jy.png)
 ## Polyfill
