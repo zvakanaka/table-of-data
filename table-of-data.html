@@ -30,11 +30,11 @@
     disconnectedCallback() {}//event cleanup
     attributeChangedCallback(name) {}//observed attribute changes
     set data(val) {
-      this.refreshTable(val);
+      this._refreshTable(val);
       this._data = val;
     }
     get data() { return (this._data || {}); }
-    refreshTable(data, options) {//add/refresh data to table
+    _refreshTable(data) {//add/refresh data to table
       let tableOfData = this.querySelector('.table-of-data');
       let frag = document.createDocumentFragment();
       let tableHeadingRow = document.createElement('tr');
@@ -44,17 +44,17 @@
         tableHeadingRow.appendChild(tableHeading);
       });
       frag.appendChild(tableHeadingRow);
-      data.rows.forEach(rowData => {
+      data.rows.forEach(row => {
         let tableRow = document.createElement('tr');
-        data.headings.forEach(column => {
+        data.headings.forEach((name, i) => {
           let rowEl = document.createElement('td');
-          if (isMarkDownURL(rowData[column])) {
+          if (isMarkDownURL(row[i])) {
             let a = document.createElement('a');
-            a.href = rowData[column].split('](')[1].slice(0, -1);
-            a.textContent = rowData[column].split('](')[0].slice(1);
+            a.href = row[i].split('](')[1].slice(0, -1);
+            a.textContent = row[i].split('](')[0].slice(1);
             rowEl.appendChild(a);
           } else {
-            rowEl.innerHTML = rowData[column];
+            rowEl.innerHTML = row[i];
           }
           tableRow.appendChild(rowEl);
         });
