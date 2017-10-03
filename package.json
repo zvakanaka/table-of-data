@@ -1,0 +1,9 @@
+{
+  "name": "table-of-data",
+  "version": "1.2.1",
+  "description": "Lightweight and easy to use data table custom element",
+  "main": "table-of-data.html",
+  "repository": "https://github.com/zvakanaka/table-of-data.git",
+  "author": "Adam Quinton <quintonish@gmail.com>",
+  "license": "MIT"
+}
