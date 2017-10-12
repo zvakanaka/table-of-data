@@ -4,7 +4,7 @@
   "authors": [
     "quintonish@gmail.com"
   ],
-  "description": "Lightweight v1 custom element table with some markdown support.",
+  "description": "Lightweight v1 custom element table",
   "main": "table-of-data.html",
   "keywords": [
     "html",
