@@ -1,10 +1,7 @@
 (function() {
   'use strict';
   customElements.define('table-of-data', class extends HTMLElement {
-    constructor() {
-      super(); //always
-    }
-    connectedCallback() {//event listeners
+    connectedCallback() {
       this.innerHTML = `<table id="table" class="table-of-data"></table>
         <style>
           table.table-of-data td, table.table-of-data th { border-bottom: 1px solid #ddd; text-align: left; }
@@ -12,7 +9,6 @@
           table.table-of-data th, table.table-of-data td { padding: 8px; }
         </style>`;
     }
-    disconnectedCallback() {}//TODO: event cleanup
     set data(val) {
       this._refreshTable(val);
       this._data = val;
