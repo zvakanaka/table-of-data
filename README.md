@@ -1,4 +1,5 @@
 # Table Custom Element
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg?style=flat-square)](https://www.webcomponents.org/element/zvakanaka/table-of-data)  
 [demo](https://zvakanaka.github.io/table-of-data)
 ## About
 Lightweight and easy to use data table
