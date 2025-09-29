@@ -28,4 +28,4 @@ document.querySelector('table-of-data').data = data;
 ```
 ![Screenshot](http://i.imgur.com/Wi9b2Jy.png)
 ## Polyfill
-Only Custom Elements needs to be polyfilled (`webcomponents-hi-ce.js`). To see how to use a polyfill, check out [index.html](https://github.com/zvakanaka/table-of-data/blob/master/index.html#L29-L56), which only loads the polyfill if needed (credit to [Eric Bidelman](https://gist.github.com/ebidel/1d5ede1e35b6f426a2a7)).
+Only Custom Elements needs to be polyfilled (`custom-elements.js`). To see how to use a polyfill, check out [index.html](https://github.com/zvakanaka/table-of-data/blob/master/index.html#L29-L56), which only loads the polyfill if needed (credit to [Eric Bidelman](https://gist.github.com/ebidel/1d5ede1e35b6f426a2a7)).
