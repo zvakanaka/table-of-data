@@ -5,7 +5,7 @@ Lightweight and easy to use data table
 ## Usage
 Import the element in the head
 ```html
-<script src="./table-of-data.html">
+<script src="./table-of-data.js">
 ```
 Put the element somewhere in the body
 ```html
