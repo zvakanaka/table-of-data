@@ -45,7 +45,7 @@ window.addEventListener('WebComponentsReady', function(e) {
     if (!webComponentsSupported) {
       var script = document.createElement('script');
       script.async = true;
-      script.src = 'lib/webcomponents-hi-ce.js';
+      script.src = 'https://cdnjs.cloudflare.com/ajax/libs/webcomponentsjs/1.0.1/webcomponents-hi-ce.js';
       script.onload = onload;
       document.head.appendChild(script);
     } else {
