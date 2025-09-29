@@ -1,6 +1,5 @@
 <template id="table-of-data-template">
-  <table class="table-of-data">
-  </table>
+  <table class="table-of-data"></table>
 </template>
 <script type="text/javascript">
   const CAN_SHADOW_DOM = !!HTMLElement.prototype.attachShadow;//V1
@@ -15,13 +14,13 @@
   }
   function isMarkDownURL(text) {
     let expression = /\[([-a-zA-Z0-9@:%_\+.~#?&//=\s]*)\]\((https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))\)/g;
-    if (text.match(new RegExp(expression))) return true;
+    if (expression.test(text)) return true;
     return false;
   }
   //querySelector only works at top level because currentScript is only valid there
   const template = querySelector('template#table-of-data-template');
   customElements.define('table-of-data', class extends HTMLElement {
-    constructor() {//template setup things here
+    constructor() {//template setup
       var styleEl = document.createElement('style');
       styleEl.setAttribute('title', 'table-of-data');
       let css = `.table-of-data td, .table-of-data th { border-bottom: 1px solid #ddd; text-align: left; } table.table-of-data { border-collapse: collapse; width: 100%; } table.table-of-data th, table.table-of-data td { padding: 8px; }`;
@@ -45,7 +44,7 @@
     }
     attachedCallback() {}//event listeners
     detachedCallback() {}//event cleanup
-    attributeChangedCallback(name) {}//react to observed attribute changes here
+    attributeChangedCallback(name) {}//observed attribute changes
     attachTable(data) {//add/refresh data to table
       this.data = data;
       let root = CAN_SHADOW_DOM ? this.shadowRoot : this;
