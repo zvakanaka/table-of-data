@@ -1,0 +1,26 @@
+{
+  "name": "table-of-data",
+  "homepage": "https://github.com/zvakanaka/table-of-data",
+  "authors": [
+    "quintonish@gmail.com"
+  ],
+  "description": "v1 web component table",
+  "main": "table-of-data.html",
+  "keywords": [
+    "html",
+    "web",
+    "webcomponent",
+    "component",
+    "table",
+    "data",
+    "grid"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
