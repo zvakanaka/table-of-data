@@ -7,6 +7,7 @@
   let querySelector = function(selector) {
     //currentScript is this ^ script tag, and the owner is this document around it
     let script = document._currentScript || document.currentScript;
+    //ownerDocument is this entire file
     return script ? script.ownerDocument.querySelector(selector) : document.querySelector(selector);
   };
   function isElementShadowRoot(el) {
@@ -14,10 +15,11 @@
   }
   function isMarkDownURL(text) {
     let expression = /\[([-a-zA-Z0-9@:%_\+.~#?&//=\s]*)\]\((https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))\)/g;
-    if (expression.test(text)) return true;
+    if (text.match(new RegExp(expression))) return true;
     return false;
   }
-
+  //querySelector only works at top level because currentScript is only valid there
+  const template = querySelector('template#table-of-data-template');
   customElements.define('table-of-data', class extends HTMLElement {
     //template setup things here
     constructor() {
@@ -31,8 +33,7 @@
         styleEl.appendChild(document.createTextNode(css));
       }
       super(); //always always
-      const t = querySelector('template#table-of-data-template');
-      const instance = t.content.cloneNode(true);
+      const instance = template.content.cloneNode(true);
       if (CAN_SHADOW_DOM) {
         let shadowRoot = this.attachShadow({mode: 'open'});
         shadowRoot.appendChild(instance);
