@@ -29,8 +29,12 @@
     }
     disconnectedCallback() {}//event cleanup
     attributeChangedCallback(name) {}//observed attribute changes
-    attachTable(data, options) {//add/refresh data to table
-      this.data = data;
+    set data(val) {
+      this.refreshTable(val);
+      this._data = val;
+    }
+    get data() { return (this._data || {}); }
+    refreshTable(data, options) {//add/refresh data to table
       let tableOfData = this.querySelector('.table-of-data');
       let frag = document.createDocumentFragment();
       let tableHeadingRow = document.createElement('tr');
