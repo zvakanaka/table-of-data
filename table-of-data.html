@@ -14,7 +14,7 @@
   }
   function isMarkDownURL(text) {
     let expression = /\[([-a-zA-Z0-9@:%_\+.~#?&//=\s]*)\]\((https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))\)/g;
-    if (text.match(new RegExp(expression))) return true;
+    if (expression.test(text)) return true;
     return false;
   }
 
