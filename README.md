@@ -1,9 +1,9 @@
-# Table Web Component
+# Table Custom Element
 [demo](https://zvakanaka.github.io/table-of-data)
 ## About
 Lightweight and easy to use data table with some markdown support.
 ## Usage
-Import the web component in the head
+Import the element in the head
 ```html
 <link rel="import" href="table-of-data.html">
 ```
