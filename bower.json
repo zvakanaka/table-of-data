@@ -5,7 +5,7 @@
     "quintonish@gmail.com"
   ],
   "description": "Lightweight v1 custom element table",
-  "main": "table-of-data.html",
+  "main": "table-of-data.js",
   "keywords": [
     "html",
     "web",
