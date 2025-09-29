@@ -12,6 +12,11 @@
   function isElementShadowRoot(el) {
     return !!(el.toString() === '[Object] ShadowRoot');
   }
+  function isMarkDownURL(text) {
+    let expression = /\[([-a-zA-Z0-9@:%_\+.~#?&//=\s]*)\]\((https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*))\)/g;
+    if (text.match(new RegExp(expression))) return true;
+    return false;
+  }
 
   customElements.define('table-of-data', class extends HTMLElement {
     //template setup things here
@@ -66,7 +71,14 @@
         let tableRow = document.createElement('tr');
         data.headings.forEach(column => {
           let rowEl = document.createElement('td');
-          rowEl.textContent = rowData[column];
+          if (isMarkDownURL(rowData[column])) {
+            let a = document.createElement('a');
+            a.href = rowData[column].split('](')[1].slice(0,-1);
+            a.textContent = rowData[column].split('](')[0].slice(1);
+            rowEl.appendChild(a);
+          } else {
+            rowEl.textContent = rowData[column];
+          }
           tableRow.appendChild(rowEl);
         });
         tableOfData.appendChild(tableRow);
